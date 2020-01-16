@@ -3,14 +3,14 @@ import pandas as pd
 
 import sys
 if len(sys.argv) != 2:
-    print("Pass the pdf of results")
+    print("Pass the pdf of results as an argument.")
+    exit(1)
 
 amount = 0
 total_score = 0
 df = tabula.read_pdf(sys.argv[1], pages='all', silent=True)
 
 for page in df:
-    scope_column = "Scope" if "Completed courses Scope" not in page.columns else "Completed courses Scope"
     for row in page.itertuples(False, None):
         index = 0 if pd.isna(row[1]) else 1
         if pd.isna(row[2]):
